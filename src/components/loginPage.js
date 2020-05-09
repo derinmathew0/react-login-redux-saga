@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { loginUserAction } from '../actions/authenticationActions';
 import { setCookie } from '../utils/cookies';
 
+import { Form, Input, Button, Row, Col, Alert } from 'antd';
+import 'antd/dist/antd.css';
 class LoginPage extends Component {
-  onHandleLogin = (event) => {
-    event.preventDefault();
+  handleSubmit = (values) => {
 
-    let email = event.target.email.value;
-    let password = event.target.password.value;
-
+    let email = values.email;
+    let password = values.password;
+    let strategy = 'local';
     const data = {
-      email, password
+      strategy, email, password
     };
 
     this.props.dispatch(loginUserAction(data));
@@ -24,40 +25,91 @@ class LoginPage extends Component {
   }
 
   render() {
-    let isSuccess, message;
 
+    let isSuccess, message;
+    const layout = {
+      labelCol: {
+        span: 8,
+      },
+      wrapperCol: {
+        span: 6,
+      },
+    };
+    const tailLayout = {
+      wrapperCol: {
+        offset: 8,
+        span: 16,
+      },
+    };
     if (this.props.response.login.hasOwnProperty('response')) {
-      isSuccess = this.props.response.login.response.success;
+      isSuccess = this.props.response.login.response.hasOwnProperty('errors') ? false : true;
       message = this.props.response.login.response.message;
-      
+
       if (isSuccess) {
-        setCookie('token', this.props.response.login.response.token, 1);
+        setCookie('token', this.props.response.login.response.accessToken, 1);
+        
       }
     }
 
     return (
-      <div>
-        <h3>Login Page</h3>
-        {!isSuccess ? <div>{message}</div> : <Redirect to='dashboard' />}
-        <form onSubmit={this.onHandleLogin}>
-          <div>
-            <label htmlFor="email">Email</label>
-            <input type="email" name="email" id="email" />
-          </div>
-          <div>
-            <label htmlFor="password">Password</label>
-            <input type="password" name="password" id="password" />
-          </div>
-          <div>
-            <button>Login</button>
-          </div>
-        </form>
-        Don't have account? <Link to='register'>Register here</Link>
-      </div>
+
+      <Row style={{ padding: '2%' }}>
+        <Col span={12} offset={10}><h3>Login Page</h3></Col>
+        
+        <Col span={6} offset={8} style={{ marginBottom: '1%' }}>{message ? <Alert message={message} type="error" /> : ''}</Col>
+        
+        {isSuccess ? <Redirect to='dashboard' /> : ''}
+        <Col span={24} >
+
+          <Form onFinish={this.handleSubmit}
+            {...layout}
+            name="basic"
+            initialValues={{
+              remember: true,
+            }}
+
+          >
+            <Form.Item
+              label="Username"
+              name="email"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your username!',
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              label="Password"
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your password!',
+                },
+              ]}
+            >
+              <Input.Password />
+            </Form.Item>
+
+
+
+            <Form.Item {...tailLayout}>
+              <Button type="primary" htmlType="submit">
+                Submit
+        </Button>
+            </Form.Item>
+          </Form>
+        </Col>
+      </Row>
+
     );
   }
 }
 
-const mapStateToProps = (response) => ({response});
+const mapStateToProps = (response) => ({ response });
 
 export default connect(mapStateToProps)(LoginPage);
