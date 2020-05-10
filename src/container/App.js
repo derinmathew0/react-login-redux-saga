@@ -7,7 +7,7 @@ import {
 
 import PrivateRoute from './privateRoute';
 import LoginPage from '../components/loginPage';
-import DashboardPage from '../components/dashboardPage';
+import TimeSlotPage from '../components/timeSlotPage';
 
 class App extends Component {
   render() {
@@ -17,7 +17,7 @@ class App extends Component {
           <Switch>
             <Route path='/' exact={true} component={LoginPage} />
             <Route path='/login' component={LoginPage} />
-            <PrivateRoute path='/dashboard' component={DashboardPage} />
+            <PrivateRoute path='/timeslot' component={TimeSlotPage} />
           </Switch>
         </div>
       </BrowserRouter>

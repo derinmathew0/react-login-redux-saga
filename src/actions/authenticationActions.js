@@ -6,9 +6,3 @@ export const loginUserAction = (user) => {
     user
   }
 };
-export const getTimeSlotAction = () => {
-  return {
-    type: types.GET_TIME_SLOT
-    
-  }
-};

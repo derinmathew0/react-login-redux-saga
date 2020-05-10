@@ -58,7 +58,7 @@ class LoginPage extends Component {
         
         <Col span={6} offset={8} style={{ marginBottom: '1%' }}>{message ? <Alert message={message} type="error" /> : ''}</Col>
         
-        {isSuccess ? <Redirect to='dashboard' /> : ''}
+        {isSuccess ? <Redirect to='timeslot' /> : ''}
         <Col span={24} >
 
           <Form onFinish={this.handleSubmit}
