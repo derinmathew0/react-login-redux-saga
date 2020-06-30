@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { getTimeSlotAction, getTimeSlotsByDate } from '../actions/timeslotActions';
+import { getTimeSlotAction, getTimeSlotsByDate } from './duck/timeslotActions';
 import { connect } from 'react-redux';
 import { Row, Col, Button } from 'antd';
 import * as _ from 'underscore';
 var Moment = require('moment');
 
 
-class TimeSlotPage extends Component {
+class TimeSlot extends Component {
   constructor(props){
     super(props);
     this.props.dispatch(getTimeSlotAction());
@@ -29,6 +29,7 @@ class TimeSlotPage extends Component {
     console.log('timeSlotDate::', timeSlotsBySection)
     return (
       <div>
+        <h1>Time Slot</h1>
         {!_.isEmpty(dates) && <Row style={{ paddingLeft: '4%',paddingRight:'2%' }} gutter={[8, 16]}>
           <Col span={14} offset={10}><h2>Available Dates</h2></Col>
           {
@@ -78,5 +79,5 @@ class TimeSlotPage extends Component {
 }
 const mapStateToProps = (response) => ({ response });
 
-export default connect(mapStateToProps)(TimeSlotPage);
+export default connect(mapStateToProps)(TimeSlot);
 

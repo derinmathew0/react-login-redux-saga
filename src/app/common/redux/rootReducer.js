@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import timeSlot from './timeSlotReducer';
-import login from './loginReducer';
+import timeSlot from '../../timeslot/duck/timeSlotReducer';
+import login from '../../login/duck/loginReducer';
 
 const rootReducer = combineReducers({
   timeSlot, login

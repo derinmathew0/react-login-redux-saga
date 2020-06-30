@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { loginUserAction } from '../actions/authenticationActions';
-import { setCookie } from '../utils/cookies';
+import { loginUserAction } from './duck/authenticationActions';
+import { setCookie } from '../common/utils/cookies';
 
 import { Form, Input, Button, Row, Col, Alert } from 'antd';
 import 'antd/dist/antd.css';
-class LoginPage extends Component {
+class Login extends Component {
   handleSubmit = (values) => {
 
     let email = values.email;
@@ -112,4 +112,4 @@ class LoginPage extends Component {
 
 const mapStateToProps = (response) => ({ response });
 
-export default connect(mapStateToProps)(LoginPage);
+export default connect(mapStateToProps)(Login);

@@ -1,7 +1,7 @@
 import { put, call } from 'redux-saga/effects';
-import { timeSlotService } from '../services/timeSlotService';
+import { timeSlotService } from './timeSlotService';
 
-import * as types from '../actions'
+import * as types from './timeslotTypes'
 
 export function* getTimeSlotSaga(payload) {
   try {

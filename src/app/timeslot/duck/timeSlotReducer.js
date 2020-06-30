@@ -1,4 +1,4 @@
-import * as types from '../actions';
+import * as types from './timeslotTypes';
 import * as _ from 'underscore';
 const initState = {
     response: [],
@@ -44,17 +44,17 @@ export default function (state = initState, action) {
         };
         
 
-        timeSlotsByDate.map((slot) => {
-            if (slot.time < '12:00:00') {
-                timeSlotsBySection['morning'].push(slot);
-            }
-            else if (slot.time < '16:00:00' && slot.time >= '14:00:00') {
-                timeSlotsBySection['noon'].push(slot);
-            }
-            else if (slot.time <= '17:00:00' && slot.time >= '16:00:00') {
-                timeSlotsBySection['evening'].push(slot);
-            }
-        })
+        // timeSlotsByDate.map((slot) => {
+        //     if (slot.time < '12:00:00') {
+        //         timeSlotsBySection['morning'].push(slot);
+        //     }
+        //     else if (slot.time < '16:00:00' && slot.time >= '14:00:00') {
+        //         timeSlotsBySection['noon'].push(slot);
+        //     }
+        //     else if (slot.time <= '17:00:00' && slot.time >= '16:00:00') {
+        //         timeSlotsBySection['evening'].push(slot);
+        //     }
+        // })
         return timeSlotsBySection;
     }
 };

@@ -1,4 +1,4 @@
-import * as types from './index';
+import * as types from './authenticationTypes';
 
 export const loginUserAction = (user) => {
   return {

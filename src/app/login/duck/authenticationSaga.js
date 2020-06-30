@@ -1,7 +1,7 @@
 import { put, call } from 'redux-saga/effects';
-import { loginUserService } from '../services/authenticationService';
+import { loginUserService } from './authenticationService';
 
-import * as types from '../actions'
+import * as types from './authenticationTypes'
 
 export function* loginSaga(payload) {
   try {
